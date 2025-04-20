@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EEG Database Tables</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .section {
+            margin-bottom: 40px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>EEG Database Contents</h1>
+
+    <div class="section">
+        <h2>Users Table</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.created_at }}</td>
+                    <td>{{ user.updated_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Patients Table</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Birth Date</th>
+                    <th>Sex</th>
+                    <th>Created By (User ID)</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+                <tr>
+                    <td>{{ patient.id }}</td>
+                    <td>{{ patient.first_name }}</td>
+                    <td>{{ patient.last_name }}</td>
+                    <td>{{ patient.birth_date }}</td>
+                    <td>{{ patient.sex }}</td>
+                    <td>{{ patient.user_id }}</td>
+                    <td>{{ patient.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="section">
+        <h2>Patient States</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient ID</th>
+                    <th>Weight</th>
+                    <th>Height</th>
+                    <th>Conditions</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for state in states %}
+                <tr>
+                    <td>{{ state.id }}</td>
+                    <td>{{ state.patient_id }}</td>
+                    <td>{{ state.weight }}</td>
+                    <td>{{ state.height }}</td>
+                    <td>{{ state.conditions }}</td>
+                    <td>{{ state.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>EEG Files</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>State ID</th>
+                    <th>File Name</th>
+                    <th>File Path</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for eeg in eeg_files %}
+                <tr>
+                    <td>{{ eeg.id }}</td>
+                    <td>{{ eeg.state_id }}</td>
+                    <td>{{ eeg.file_name }}</td>
+                    <td>{{ eeg.file_path }}</td>
+                    <td>{{ eeg.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Analysis Reports</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>State ID</th>
+                    <th>EEG ID</th>
+                    <th>Diagnosis</th>
+                    <th>Confidence Level</th>
+                    <th>Analyzed At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for report in reports %}
+                <tr>
+                    <td>{{ report.id }}</td>
+                    <td>{{ report.state_id }}</td>
+                    <td>{{ report.eeg_id }}</td>
+                    <td>{{ report.diagnosis }}</td>
+                    <td>{{ report.confidence_level }}</td>
+                    <td>{{ report.analyzed_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

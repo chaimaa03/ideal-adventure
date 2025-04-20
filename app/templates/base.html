@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Application innovante d'analyse EEG assistée par IA. Importez vos images, obtenez un diagnostic rapide et explorez les résultats en toute simplicité. Outil destiné aux médecins, chercheurs et patients curieux.">
+  <meta name="author" content="Neuvera Team">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="Neuro scan, Neuvera, Brain health, Medical technology, ai, Neuro, Health, analyse EEG, intelligence artificielle, diagnostic médical, application EEG, neurologie, images EEG, IA santé, interprétation EEG, application médicale, médecine prédictive, EEG mobile, diagnostic rapide, patients, médecins, chercheurs, électroencéphalogramme, IA neurologique">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/visit.css') }}">
+
+  <link rel="icon" href="{{ url_for('static', filename='pictures/iconLogo.png') }}" type="image/png">
+  <title>Neuvera</title>
+</head>
+<body>
+  <nav class="navbar">
+    <img src="{{ url_for('static', filename='pictures/logNobackgrwnd.png') }}" alt="Logo Neuvera" class="nav-logo">
+    <div class="nav-links">
+      <a href="#accueil" class="active">Accueil</a>
+      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="#apropos">À propos</a>
+      <a href="/auth/login">Connexion</a>
+      <a href="/auth/register">S'inscrire</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="accueil">
+    <div class="hero-content">
+      <h1>Bienvenue sur <span class="highlight">Neuvera</span> !</h1>
+      <h3 class="subtitle">DECODING MINDS, ONE WAVE AT A TIME.</h3>
+      <p class="description">
+        Neuvera est une plateforme intelligente qui utilise la puissance de l'intelligence artificielle pour interpréter les images EEG. Conçue pour les professionnels de santé, chercheurs et patients curieux, elle simplifie le diagnostic et accélère les décisions médicales.
+      </p>
+      <ul class="features-list">
+        <li> Analyse rapide et précise des tracés EEG</li>
+        <li> Recommandations basées sur les résultats</li>
+        <li> Données sécurisées et personnelles</li>
+        <li> Interface intuitive et multilingue</li>
+      </ul>
+      <a href="#" class="btn-start">COMMENCER MAINTENANT</a>
+    </div>
+  </header>
+</body>
+</html>

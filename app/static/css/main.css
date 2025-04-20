@@ -1,0 +1,16 @@
+body{
+    margin:0;
+    font-family: sans-serif;
+}
+div{
+    text-align: center;
+}
+table{
+    border: 5px bold black; 
+    margin: 0;
+    width: 100%;
+
+}
+td,th{
+    border: 2px bold black;
+}
