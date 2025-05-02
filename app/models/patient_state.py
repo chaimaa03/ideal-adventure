@@ -16,6 +16,6 @@ class PatientState(db.Model):
     
     # Relationships:
     # One state can have many EEG files
-    eeg_files = db.relationship('EEGFile', foreign_keys=[eeg_id], backref='state', lazy=True)
+    eeg_file = db.relationship('EEGFile', foreign_keys=[eeg_id], backref='patient_state', lazy=True)
     # One state can have many analysis reports
     reports = db.relationship('AnalysisReport', backref='state', lazy=True)

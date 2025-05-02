@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify,render_template
 from ..models.analysis_report import AnalysisReport
 from ..extensions import db
 
@@ -42,3 +42,8 @@ def get_analysis_reports():
             "eeg_id": r.eeg_id
         } for r in reports
     ])
+
+@analysis_report_bp.route('/<int:file_id>/report', methods=['GET'])
+def view_analysis_report( file_id):
+    analysis_report = AnalysisReport.query.filter_by(eeg_file_id=file_id).first_or_404()
+    return render_template('analysis_report.html', analysis_report=analysis_report)

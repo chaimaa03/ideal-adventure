@@ -12,5 +12,7 @@ class Patient(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     # Relationship: One patient can have many states
-    folder = db.relationship('EEGFolder', uselist=False, backref='patient', cascade='all, delete-orphan')
-    states = db.relationship('PatientState', backref='patient', lazy=True, cascade='all, delete-orphan')
+    eeg_folder = db.relationship('EEGFolder', uselist=False, backref='patients', cascade='all, delete-orphan')
+    patient_state = db.relationship('PatientState', backref='patient', lazy=True, cascade='all, delete-orphan')
+    eeg_files = db.relationship('EEGFile', backref='patient', lazy=True, cascade='all, delete-orphan')
+    

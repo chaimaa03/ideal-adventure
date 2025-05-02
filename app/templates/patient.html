@@ -6,6 +6,7 @@
 </head>
 <body>
     <h1>Patients</h1>
+    {% if patients %}
     <table>
         <tr>
             <th>ID</th>
@@ -24,5 +25,9 @@
         </tr>
         {% endfor %}
     </table>
+{% else %}
+    <p>No patients found.</p>
+{% endif %}
+   
 </body>
 </html>

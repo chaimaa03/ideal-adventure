@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Patient</title>
+</head>
+<body>
+    <h1>Add Patient</h1>
+    <form method="POST" action="/api/patients/add_patient">
+        <label for="first_name">First Name:</label><br>
+        <input type="text" id="first_name" name="first_name"><br>
+        <label for="last_name">Last Name:</label><br>
+        <input type="text" id="last_name" name="last_name"><br>
+        <label for="birth_date">Birth Date:</label><br>
+        <input type="date" id="birth_date" name="birth_date"><br>
+        <label for="sex">Sex:</label><br>
+        <select id="sex" name="sex">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select><br><br>
+        <button type="submit">Add Patient</button>
+    </form>
+</body>
+</html>

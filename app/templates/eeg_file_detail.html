@@ -1,0 +1,20 @@
+<h1>EEG File: {{ eeg_file.file_name }}</h1>
+<p><strong>File Path:</strong> {{ eeg_file.file_path }}</p>
+
+<h2>State</h2>
+{% if state %}
+<p><strong>Status:</strong> {{ state.status }}</p>
+<p><strong>Comments:</strong> {{ state.comments }}</p>
+{% else %}
+<p>No state information available.</p>
+{% endif %}
+
+<h2>Analysis Report</h2>
+{% if analysis_report %}
+<p><strong>Diagnosis:</strong> {{ analysis_report.diagnosis }}</p>
+<p><strong>Confidence Level:</strong> {{ analysis_report.confidence_level }}</p>
+<p><strong>Rhythm Analysis:</strong> {{ analysis_report.rhythm_analysis }}</p>
+<p><strong>Anomalies:</strong> {{ analysis_report.anomalies }}</p>
+{% else %}
+<p>No analysis report available.</p>
+{% endif %}

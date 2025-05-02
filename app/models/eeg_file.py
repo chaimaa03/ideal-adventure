@@ -9,9 +9,10 @@ class EEGFile(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     state_id = db.Column(db.Integer, db.ForeignKey('patient_states.id', ondelete='CASCADE'))
     
+    patient_id = db.Column(db.Integer, db.ForeignKey('patients.id', ondelete='CASCADE'), nullable=False)
     # Relationship: One EEG file has one analysis report
-    analysis = db.relationship('AnalysisReport', backref='eeg_file', uselist=False, cascade='all, delete-orphan')
+    analysis_report = db.relationship('AnalysisReport', uselist=False, backref='eeg_file', cascade='all, delete-orphan')
     eeg_folder_id = db.Column(db.Integer, db.ForeignKey('eeg_folders.id', ondelete='CASCADE'), nullable=True)
-    state = db.relationship('PatientState', foreign_keys=[state_id], uselist=False, backref='eeg_file', cascade='all, delete-orphan')
+    state = db.relationship('PatientState', foreign_keys=[state_id], uselist=False,backref='eeg_files', lazy=True)
 
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Folder Details</title>
+</head>
+<body>
+    <h1>Folder: {{ folder.folder_name }}</h1>
+    <p>{{ folder.description }}</p>
+
+    <h2>Sections</h2>
+    <ul>
+        <li>
+            <!-- Link to the patient's details -->
+            <a href="{{ url_for('patient.view_patient', patient_id=patient.id) }}">
+                Patient Information
+            </a>
+        </li>
+        <li>
+            <h3>States (Files)</h3>
+            <ul>
+                {% for file in eeg_files %}
+                <li>{{ file.file_name }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>

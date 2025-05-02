@@ -14,3 +14,4 @@ class EEGFolder(db.Model):
 
     # Relationship: One folder has many EEG files
     eeg_files = db.relationship('EEGFile', backref='folder', lazy=True, cascade='all, delete-orphan')
+    
