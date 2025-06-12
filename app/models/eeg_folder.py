@@ -9,9 +9,8 @@ class EEGFolder(db.Model):
     description = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # Foreign key to link this folder to a patient or patient state (choose one)
-    patient_id = db.Column(db.Integer, db.ForeignKey('patients.id', ondelete='CASCADE'), nullable=False)
-
+    
     # Relationship: One folder has many EEG files
     eeg_files = db.relationship('EEGFile', backref='folder', lazy=True, cascade='all, delete-orphan')
-    
+    patients = db.relationship('Patient', backref='eeg_folder', lazy=True,cascade="all, delete-orphan")
+

@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Folder List</title>
+    <title>Patient List</title>
 </head>
 <body>
-    <h1>Folder List</h1>
-    <a href="{{ url_for('eeg_folder.add_patient') }}">Create Patient</a>
+    <h1>Patient List</h1>
+    <a href="{{ url_for('eeg_folder.add_patient') }}">Add Patient</a>
     <ul>
-        {% for folder in folders %}
+        {% for patient in patients %}
         <li>
-            <a href="{{ url_for('eeg_folder.view_folder', folder_id=folder.id) }}">
-                {{ folder.folder_name }}
+            <a href="{{ url_for('eeg_folder.get_patient_eeg_files', patient_id=patient.id) }}">
+                {{ patient.first_name }} {{ patient.last_name }}
             </a>
         </li>
         {% endfor %}
-    </ul>
+    </ul>       
+       
 </body>
 </html>

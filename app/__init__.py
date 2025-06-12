@@ -3,7 +3,7 @@ from flask import Flask
 from .extensions import db, migrate
 from .config import Config
 from .routes import register_blueprints  # You can register multiple Blueprints here
-from .models import users, patient , patient_state, eeg_file, eeg_folder, analysis_report, history
+from .models import ml_utils,users, patient , patient_state, eeg_file, eeg_folder, AnalysisReport, history
 pymysql.install_as_MySQLdb()
 
 def create_app():

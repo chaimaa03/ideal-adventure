@@ -4,18 +4,25 @@ from ..extensions import db
 class PatientState(db.Model):
     __tablename__ = 'patient_states'
     id = db.Column(db.Integer, primary_key=True)
-    weight = db.Column(db.Float)
-    height = db.Column(db.Float)
-    conditions = db.Column(db.Text) #we need patient's file 
-    sleep_patterns = db.Column(db.Text)
-    stress_level = db.Column(db.String(20))
-    comments = db.Column(db.Text)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    patient_id = db.Column(db.Integer, db.ForeignKey('patients.id', ondelete='CASCADE'), nullable=False)
-    eeg_id = db.Column(db.Integer, db.ForeignKey('eeg_files.id'), nullable=False)
     
-    # Relationships:
-    # One state can have many EEG files
-    eeg_file = db.relationship('EEGFile', foreign_keys=[eeg_id], backref='patient_state', lazy=True)
-    # One state can have many analysis reports
-    reports = db.relationship('AnalysisReport', backref='state', lazy=True)
+    weight = db.Column(db.Float, nullable=True)
+    height = db.Column(db.Float, nullable=True)
+    
+    suspicion_level = db.Column(db.String(50), nullable=False)  # "Faible", "Modéré", "Élevé"
+    symptoms = db.Column(db.Text, nullable=False)  # Observed symptoms
+    family_history = db.Column(db.String(10), nullable=False)  # "Oui" or "Non"
+    cognitive_score = db.Column(db.String(255), nullable=True)  # Cognitive evaluation score or notes
+    motor_observation = db.Column(db.String(50), nullable=True)  # "Normale" or "Anormale"
+    speech_notes = db.Column(db.Text, nullable=True)  # Observations on speech
+    social_behavior = db.Column(db.Text, nullable=True)  # Social behavior observations
+    
+   
+    patient_id = db.Column(db.Integer, db.ForeignKey('patients.id', ondelete='CASCADE'), nullable=False)
+    # Optional relationship
+    patient = db.relationship("Patient", backref="states",cascade="all, delete-orphan")
+    eeg_file = db.relationship('EEGFile', backref=db.backref('state', uselist=False, cascade='all, delete'))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    def __repr__(self):
+        return f"<PatientState id={self.id} suspicion_level={self.suspicion_level}>"
+    

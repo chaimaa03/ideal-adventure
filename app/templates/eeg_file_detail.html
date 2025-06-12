@@ -1,20 +1,79 @@
-<h1>EEG File: {{ eeg_file.file_name }}</h1>
-<p><strong>File Path:</strong> {{ eeg_file.file_path }}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EEG File Details</title>
+</head>
+<body>
+    <h1>EEG File Details</h1>
 
-<h2>State</h2>
-{% if state %}
-<p><strong>Status:</strong> {{ state.status }}</p>
-<p><strong>Comments:</strong> {{ state.comments }}</p>
-{% else %}
-<p>No state information available.</p>
-{% endif %}
+    <!-- Section 1: Patient State -->
+    <h2>Patient State</h2>
+    {% if state %}
+      <p><strong>Weight:</strong> {{ state.weight }} kg</p>
+      <p><strong>Height:</strong> {{ state.height }} cm</p>
+      <p><strong>Suspicion Level:</strong> {{ state.suspicion_level }}</p>
+      <p><strong>Symptoms:</strong> {{ state.symptoms }}</p>
+      <p><strong>Family History:</strong> {{ state.family_history }}</p>
+      <p><strong>Cognitive Score:</strong> {{ state.cognitive_score }}</p>
+      <p><strong>Motor Observation:</strong> {{ state.motor_observation }}</p>
+      <p><strong>Speech Notes:</strong> {{ state.speech_notes }}</p>
+      <p><strong>Social Behavior:</strong> {{ state.social_behavior }}</p>
+    {% else %}
+        <p>No state information available.</p>
+    {% endif %}
 
-<h2>Analysis Report</h2>
-{% if analysis_report %}
-<p><strong>Diagnosis:</strong> {{ analysis_report.diagnosis }}</p>
-<p><strong>Confidence Level:</strong> {{ analysis_report.confidence_level }}</p>
-<p><strong>Rhythm Analysis:</strong> {{ analysis_report.rhythm_analysis }}</p>
-<p><strong>Anomalies:</strong> {{ analysis_report.anomalies }}</p>
-{% else %}
-<p>No analysis report available.</p>
-{% endif %}
+    <!-- Section 2: EEG File -->
+    <h2>EEG File</h2>
+    <p>
+        Le fichier EEG analysé est nommé <strong>{{ eegfile.file_name }}</strong> et a été correctement importé depuis le chemin suivant :
+        <code>{{ eegfile.file_path }}</code>.
+    </p>
+
+    <!-- Section 3: Analysis Report -->
+    <h2>Analysis Report</h2>
+    {% if report %}
+    <main class="report-container">
+
+        <h2>Rapport Médical - Analyse EEG</h2>
+      
+        <p>
+          Le patient <strong>{{ patient.first_name }} {{ patient.last_name }}</strong>, âgé de <strong>{{ report.patient_age }}</strong> ans, de sexe <strong>{{ patient.sex }}</strong>, a subi un examen EEG le <strong>{{ report.analyzed_at.strftime('%d/%m/%Y à %H:%M') }}</strong>.
+        </p>
+      
+        <p>
+          Les données EEG ont été analysées à l'aide de deux approches d'intelligence artificielle :
+          un modèle <strong>Machine Learning</strong> a indiqué un diagnostic de <strong>{{ report.diagnosis.split('/')[0].replace('ML:', '').strip() }}</strong>,
+          tandis que le modèle <strong>Deep Learning</strong> a conclu à <strong>{{ report.diagnosis.split('/')[1].replace('DL:', '').strip() }}</strong>.
+          Le niveau de confiance global moyen est estimé à <strong>{{ report.confidence_level }}%</strong>.
+        </p>
+      
+        <p>
+          L'analyse des rythmes cérébraux a révélé un schéma <strong>{{ report.rhythm_analysis.lower() }}</strong>.
+        </p>
+      
+        <p>
+          Sur le plan clinique, le patient présente un poids de <strong>{{ state.weight }} kg</strong> pour une taille de <strong>{{ state.height }} cm</strong>.
+          Le niveau de suspicion clinique a été évalué comme <strong>{{ state.suspicion_level.lower() }}</strong>, avec les symptômes suivants observés :
+          <em>{{ state.symptoms }}</em>.
+          Les antécédents familiaux de schizophrénie sont indiqués comme <strong>{{ state.family_history }}</strong>.
+        </p>
+      
+        <p>
+          L’évaluation cognitive rapporte : <strong>{{ state.cognitive_score or "Non spécifié" }}</strong>.
+          La coordination motrice est <strong>{{ state.motor_observation }}</strong>,
+          tandis que les observations sur la parole indiquent : <em>{{ state.speech_notes or "aucune remarque" }}</em>.
+          Le comportement social observé est décrit comme : <em>{{ state.social_behavior or "non rapporté" }}</em>.
+        </p>
+      
+        <p>
+          En conclusion, le rapport suggère une attention particulière aux symptômes observés et recommande un suivi régulier.
+          Il est conseillé de consulter un spécialiste pour une évaluation plus approfondie et un plan de traitement adapté.
+        </p>
+      </main>
+      
+    {% else %}
+        <p>No analysis report available.</p>
+    {% endif %}
+</body>
+</html>

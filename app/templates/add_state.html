@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Nouvel État - Examen Schizophrénie</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/add_state.css') }}">
+</head>
+<body>
+  <main class="container">
+
+    <h2>Ajouter un état pour le patient : {{ patient.first_name }} {{ patient.last_name }}</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      <ul>
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('eegfile.create_eegfile', patient_id=patient.id) }}" method="POST" enctype="multipart/form-data">
+      <fieldset>
+        <legend>Examen neurologique ciblé schizophrénie</legend>
+
+        <label for="weight">Poids (kg) :</label>
+        <input type="number" name="weight" step="0.1" placeholder="Exemple : 70.5" required>
+
+        <label for="height">Taille (cm) :</label>
+        <input type="number" name="height" step="0.1" placeholder="Exemple : 180.0" required>
+
+        <label for="suspicion_level">Niveau de suspicion :</label>
+        <select name="suspicion_level" required>
+          <option value="">-- Sélectionner --</option>
+          <option value="Faible">Faible</option>
+          <option value="Modéré">Modéré</option>
+          <option value="Élevé">Élevé</option>
+        </select>
+
+        <label for="symptoms">Symptômes observés :</label>
+        <textarea name="symptoms" rows="3" placeholder="Hallucinations, délires, troubles de la pensée..." required></textarea>
+
+        <label for="family_history">Antécédents familiaux de schizophrénie :</label>
+        <select name="family_history" required>
+          <option value="Oui">Oui</option>
+          <option value="Non">Non</option>
+        </select>
+
+        <label for="cognitive_score">Évaluation cognitive :</label>
+        <input type="text" name="cognitive_score" placeholder="Score ou notes">
+
+        <label for="motor_observation">Coordination motrice :</label>
+        <select name="motor_observation">
+          <option value="Normale">Normale</option>
+          <option value="Anormale">Anormale</option>
+        </select>
+
+        <label for="speech_notes">Observations sur la parole :</label>
+        <textarea name="speech_notes" rows="2"></textarea>
+
+        <label for="social_behavior">Comportement social :</label>
+        <textarea name="social_behavior" rows="2"></textarea>
+
+      </fieldset>
+
+      <fieldset>
+        <legend>Fichier EEG</legend>
+
+        <label for="eeg_file">Importer un fichier EEG (.edf) :</label>
+        <input type="file" name="eeg_file" accept=".edf" required>
+      </fieldset>
+
+      <button type="submit">Soumettre l'examen</button>
+    </form>
+
+    <a href="{{ url_for('eeg_folder.get_patient_eeg_files', patient_id=patient.id) }}" class="back-link">← Retour au patient</a>
+
+  </main>
+</body>
+</html>

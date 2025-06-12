@@ -9,10 +9,14 @@ class Patient(db.Model):
     birth_date = db.Column(db.Date, nullable=False)
     sex = db.Column(db.String(10), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     
     # Relationship: One patient can have many states
-    eeg_folder = db.relationship('EEGFolder', uselist=False, backref='patients', cascade='all, delete-orphan')
-    patient_state = db.relationship('PatientState', backref='patient', lazy=True, cascade='all, delete-orphan')
+    
+    eeg_folder_id = db.Column(db.Integer, db.ForeignKey('eeg_folders.id', ondelete='CASCADE'))
+
     eeg_files = db.relationship('EEGFile', backref='patient', lazy=True, cascade='all, delete-orphan')
+
+    def __repr__(self):
+        return f"<Patient id={self.id} name={self.first_name} {self.last_name}>"
     

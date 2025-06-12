@@ -3,16 +3,24 @@ from ..extensions import db
 
 class EEGFile(db.Model):
     __tablename__ = 'eeg_files'
-    id = db.Column(db.Integer, primary_key=True)
-    file_name = db.Column(db.String(120), nullable=False)
-    file_path = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    state_id = db.Column(db.Integer, db.ForeignKey('patient_states.id', ondelete='CASCADE'))
-    
-    patient_id = db.Column(db.Integer, db.ForeignKey('patients.id', ondelete='CASCADE'), nullable=False)
-    # Relationship: One EEG file has one analysis report
-    analysis_report = db.relationship('AnalysisReport', uselist=False, backref='eeg_file', cascade='all, delete-orphan')
-    eeg_folder_id = db.Column(db.Integer, db.ForeignKey('eeg_folders.id', ondelete='CASCADE'), nullable=True)
-    state = db.relationship('PatientState', foreign_keys=[state_id], uselist=False,backref='eeg_files', lazy=True)
 
+    id = db.Column(db.Integer, primary_key=True)
+
+    file_name = db.Column(db.String(255), nullable=False)
+    file_path = db.Column(db.String(255), nullable=False)
+    uploaded_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Foreign Keys
+    patient_id = db.Column(db.Integer, db.ForeignKey('patients.id', ondelete='CASCADE'), nullable=False)
+    state_id = db.Column(db.Integer, db.ForeignKey('patient_states.id', ondelete='CASCADE'), nullable=False, unique=True)
+    eeg_folder_id = db.Column(db.Integer, db.ForeignKey('eeg_folders.id', ondelete='CASCADE'), nullable=True)
+
+
+    diagnosis = db.Column(db.String(255), nullable=True)  # ML/DL diagnosis
+    confidence_level = db.Column(db.Float, nullable=True)  # Average confidence level
+    rhythm_analysis = db.Column(db.String(255), nullable=True)  # Rhythm analysis
+    analyzed_at = db.Column(db.DateTime, nullable=True)  # Timestamp for when the report was generated
+    
+    def __repr__(self):
+        return f"<EEGFile id={self.id} file='{self.file_name}' patient_id={self.patient_id}>"
 

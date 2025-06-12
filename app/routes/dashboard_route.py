@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from ..models.patient import Patient
-from ..models.analysis_report import AnalysisReport
+from ..models.AnalysisReport import AnalysisReport
 from ..extensions import db
 
 dashboard_bp = Blueprint('dashboard', __name__,url_prefix='/api/dashboard')

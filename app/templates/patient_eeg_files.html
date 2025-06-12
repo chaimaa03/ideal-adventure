@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Patient EEG Files</title>
+</head>
+<body>
+    <h1>Patient Information</h1>
+    <p><strong>Name:</strong> {{ patient.first_name }} {{ patient.last_name }}</p>
+    <p><strong>Birth Date:</strong> {{ patient.birth_date.strftime('%Y-%m-%d') }}</p>
+    <p><strong>Sex:</strong> {{ patient.sex }}</p>
+
+    <h2>EEG Files</h2>
+    <a href="{{ url_for('eegfile.show_eegfile_form', patient_id=patient.id) }}" class="btn btn-primary">
+        Add EEG File
+    </a>
+    <ul>
+        {% for file in eeg_files %}
+        <li>
+            <p><strong>File Name:</strong> {{ file.file_name }}</p>
+            <p><strong>Created At:</strong> {{ file.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
