@@ -3,6 +3,7 @@ from ..models.eeg_folder import EEGFolder
 from ..models.patient import Patient
 from ..models.eeg_file import EEGFile
 from ..extensions import db
+from flask import flash
 
 eeg_folder_bp = Blueprint('eeg_folder', __name__, url_prefix='/api/dashboard/folder')
 
@@ -72,4 +73,18 @@ def get_patient_eeg_files(patient_id):
         patient=patient,
         eeg_files=eeg_files
     )
+
+@eeg_folder_bp.route('/patients/<int:patient_id>/delete', methods=['POST'])
+def delete_patient(patient_id):
+    try:
+        patient = Patient.query.get_or_404(patient_id)
+        db.session.delete(patient)
+        db.session.commit()
+        flash("Le patient a été supprimé avec succès.", "success")
+        return redirect(url_for('eeg_folder.list_patients'))
+    except Exception as e:
+        db.session.rollback()
+        flash(f"Erreur lors de la suppression : {str(e)}", "danger")
+        return redirect(url_for('eeg_folder.list_patients'))
+
 

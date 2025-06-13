@@ -19,7 +19,6 @@ class PatientState(db.Model):
    
     patient_id = db.Column(db.Integer, db.ForeignKey('patients.id', ondelete='CASCADE'), nullable=False)
     # Optional relationship
-    patient = db.relationship("Patient", backref="states",cascade="all, delete-orphan")
     eeg_file = db.relationship('EEGFile', backref=db.backref('state', uselist=False, cascade='all, delete'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     

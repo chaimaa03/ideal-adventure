@@ -14,7 +14,12 @@ class Patient(db.Model):
     # Relationship: One patient can have many states
     
     eeg_folder_id = db.Column(db.Integer, db.ForeignKey('eeg_folders.id', ondelete='CASCADE'))
-
+    states = db.relationship(
+    'PatientState',
+    backref='patient',
+    cascade='all, delete-orphan',
+    passive_deletes=True
+   )
     eeg_files = db.relationship('EEGFile', backref='patient', lazy=True, cascade='all, delete-orphan')
 
     def __repr__(self):

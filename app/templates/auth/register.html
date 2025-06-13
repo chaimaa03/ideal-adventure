@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/signup.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Section gauche - Vidéo -->
+    <div class="media-section">
+        <video autoplay loop muted playsinline class="back-video">
+            <source src="{{ url_for('static', filename='pics/back_video2.mp4') }}" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Section droite - Formulaire d’inscription -->
+    <div class="form-section">
+        <div class="form-box">
+            <h2>Créer un compte</h2>
+
+            <form method="POST" action="{{ url_for('auth.register') }}">
+                {{ form.hidden_tag() }}
+
+                <div class="field">
+                    {{ form.username.label }}
+                    {{ form.username(class_='input', placeholder="Nom d'utilisateur") }}
+                    {% for error in form.username.errors %}
+                        <small style="color:red;">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="field">
+                    {{ form.email.label }}
+                    {{ form.email(class_='input', placeholder="Adresse Email") }}
+                    {% for error in form.email.errors %}
+                        <small style="color:red;">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="field">
+                    {{ form.password.label }}
+                    {{ form.password(class_='input', placeholder="Mot de passe") }}
+                    {% for error in form.password.errors %}
+                        <small style="color:red;">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="field">
+                    {{ form.confirm_password.label }}
+                    {{ form.confirm_password(class_='input', placeholder="Confirmer le mot de passe") }}
+                    {% for error in form.confirm_password.errors %}
+                        <small style="color:red;">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="field btn">
+                    {{ form.submit(class_='btn') }}
+                </div>
+            </form>
+
+            <div class="login-link">
+                Déjà inscrit ? <a href="{{ url_for('auth.login') }}">Se connecter</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

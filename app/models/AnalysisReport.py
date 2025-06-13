@@ -12,5 +12,4 @@ class AnalysisReport(db.Model):
     eeg_id = db.Column(db.Integer, db.ForeignKey('eeg_files.id', ondelete='CASCADE'), nullable=False)  # Link to EEGFile
     analyzed_at = db.Column(db.DateTime, default=datetime.utcnow)  # Timestamp for when the report was generated
 
-    # Relationships
-    eeg_file = db.relationship('EEGFile', backref='analysis_reports', lazy=True,cascade="all, delete-orphan")
+    

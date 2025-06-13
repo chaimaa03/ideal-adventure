@@ -1,0 +1,168 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    background-color: #f9f9f9;
+    color: #333333;
+    line-height: 1.6;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* --- Navbar --- */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    height: 70px;
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .navbar .logo img {
+    height: auto;
+    width: 140px;
+    padding: 0;
+    object-fit: contain;
+  }
+  
+  .navbar ul {
+    display: flex;
+    list-style: none;
+  }
+  
+  .navbar li {
+    margin-left: 30px;
+  }
+  
+  .navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar a:hover {
+    color: #dd00ff;
+  }
+  
+  /* --- Dashboard layout --- */
+  .dashboard {
+    padding: 100px 2em 2em 2em; /* margin top adjusted for fixed navbar */
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+  }
+  
+  /* --- Card components --- */
+  .card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(59, 0, 67, 0.249);
+    padding: 1.5em 2em;
+    transition: transform 0.3s ease;
+  }
+  
+  .card h2 {
+    color: rgb(160, 0, 157);
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Centrage du contenu */
+  .centered {
+    text-align: center;
+  }
+  
+  /* --- Stats grid --- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5em;
+  }
+  
+  .stat h3 {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    color: rgb(160, 0, 157);
+  }
+  
+  .stat p {
+    font-size: 2em;
+    font-weight: bold;
+    color: #000000;
+  }
+  
+  /* --- Buttons --- */
+  .btn,
+  .btn-primary {
+    display: inline-block;
+    margin-top: 1.5em;
+    padding: 0.8em 1.5em;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn {
+    background-color: #eee;
+    color: #760053;
+  }
+  
+  .btn:hover {
+    background-color: #ddd;
+  }
+  
+  .btn-primary {
+    background-color: #c700b9;
+    color: #fff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #4f0040;
+  }
+  
+  /* --- Responsive adjustments --- */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+      height: auto;
+      padding: 1em;
+    }
+  
+    .navbar ul {
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .navbar li {
+      margin: 10px 0;
+    }
+  
+    .dashboard {
+      padding: 100px 1em 2em 1em;
+    }
+  
+    .card {
+      padding: 1em;
+    }
+  
+    .stat p {
+      font-size: 1.5em;
+    }
+  }

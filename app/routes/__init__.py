@@ -10,7 +10,7 @@ from .base import base_bp
 
 
 def register_blueprints(app):
-    app.register_blueprint(auth_bp, url_prefix='/api/auth')
+    app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(eeg_folder_bp, url_prefix='/api/dashboard/folder')
     app.register_blueprint(dashboard_bp, url_prefix='/api/dashboard')
     app.register_blueprint(eeg_file_bp, url_prefix='/api/dashboard/folder/patients')

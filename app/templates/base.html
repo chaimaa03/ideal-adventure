@@ -1,44 +1,225 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Application innovante d'analyse EEG assistée par IA. Importez vos images, obtenez un diagnostic rapide et explorez les résultats en toute simplicité. Outil destiné aux médecins, chercheurs et patients curieux.">
+  <meta name="description"
+    content="Application innovante d'analyse EEG assistée par IA. Importez vos images, obtenez un diagnostic rapide et explorez les résultats en toute simplicité. Outil destiné aux médecins, chercheurs et patients curieux.">
   <meta name="author" content="Neuvera Team">
   <meta name="robots" content="index, follow">
-  <meta name="keywords" content="Neuro scan, Neuvera, Brain health, Medical technology, ai, Neuro, Health, analyse EEG, intelligence artificielle, diagnostic médical, application EEG, neurologie, images EEG, IA santé, interprétation EEG, application médicale, médecine prédictive, EEG mobile, diagnostic rapide, patients, médecins, chercheurs, électroencéphalogramme, IA neurologique">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/visit.css') }}">
-
-  <link rel="icon" href="{{ url_for('static', filename='pictures/iconLogo.png') }}" type="image/png">
+  <meta name="keywords"
+    content="Neuro scan, Neuvera, Brain health, Medical technology, ai, Neuro, Health, analyse EEG, intelligence artificielle, diagnostic médical, application EEG, neurologie, images EEG, IA santé, interprétation EEG, application médicale, médecine prédictive, EEG mobile, diagnostic rapide, patients, médecins, chercheurs, électroencéphalogramme, IA neurologique">
+  <link rel="stylesheet" href="../static/css/visit.css">
+  <link rel="icon" href="../static/pictures/NEUVERA2.png" type="image/png">
   <title>Neuvera</title>
 </head>
-<body>
-  <nav class="navbar">
-    <img src="{{ url_for('static', filename='pictures/logNobackgrwnd.png') }}" alt="Logo Neuvera" class="nav-logo">
-    <div class="nav-links">
-      <a href="#accueil" class="active">Accueil</a>
-      <a href="#fonctionnalites">Fonctionnalités</a>
-      <a href="#apropos">À propos</a>
-      <a href="/auth/login">Connexion</a>
-      <a href="/auth/register">S'inscrire</a>
-    </div>
-  </nav>
 
-  <header class="hero" id="accueil">
-    <div class="hero-content">
-      <h1>Bienvenue sur <span class="highlight">Neuvera</span> !</h1>
-      <h3 class="subtitle">DECODING MINDS, ONE WAVE AT A TIME.</h3>
-      <p class="description">
-        Neuvera est une plateforme intelligente qui utilise la puissance de l'intelligence artificielle pour interpréter les images EEG. Conçue pour les professionnels de santé, chercheurs et patients curieux, elle simplifie le diagnostic et accélère les décisions médicales.
+<body>
+  <div class="vidbackground">
+    <video autoplay loop muted playsinline class="background-video">
+      <source src="../static/pictures/background.mp4" type="video/mp4">
+    </video>
+
+    <nav class="navbar">
+      <img src="../static/pictures/NEUVERA1.png" alt="Logo Neuvera" class="nav-logo">
+      <div class="nav-links">
+        <a href="#accueil" >Accueil</a>
+        <a href="#fonctionnalites" >Fonctionnalités</a>
+        <a href="#apropos" >À propos</a>
+        <a href="{{ url_for('auth.register') }}" class="register">Register</a>
+        <a href="{{ url_for('auth.login') }}" class="login">Connexion</a>
+      </div>
+    </nav>
+
+    <header class="hero" id="accueil">
+      <div class="hero-content">
+        <h1>Bienvenue sur <span class="highlight">NEUVERA</span> !</h1>
+        <h3 class="subtitle">DECODING MINDS, ONE WAVE AT A TIME</h3>
+        <p class="description">
+          Neuvera est une plateforme intelligente qui utilise la puissance de l'intelligence artificielle pour
+          interpréter les images EEG. Conçue pour les professionnels de santé, chercheurs et patients curieux, elle
+          simplifie le diagnostic et accélère les décisions médicales.
+        </p>
+        <div class="hero-typed">
+          <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+          <p class="features-auto"><span id="features-typed"></span></p>
+          <script>
+            let type = new Typed("#features-typed", {
+              strings: [
+                "🔍 Analyse EEG rapide et précise",
+                "📊 Recommandations médicales personnalisées",
+                "🔐 Sécurité et confidentialité des données",
+                "🌐 Interface intuitive et multilingue"
+              ],
+              typeSpeed: 40,
+              backSpeed: 20,
+              backDelay: 1000,
+              startDelay: 300,
+              loop: true,
+              showCursor: true,
+              cursorChar: "▌"
+            });
+          </script>
+        </div>
+        <div class="hero-btn">
+          <a href="../templates/auth/login.html" class="btn-start"><span>COMMENCER MAINTENANT</span></a>
+        </div>
+      </div>
+    </header>
+
+  </div>
+
+  <section class="fonctionnalites-section" id="fonctionnalites">
+  <video autoplay loop muted playsinline class="back2-video">
+    <source src="../static/pictures/back2.mp4" type="video/mp4">
+  </video>
+
+  <div class="fonctionnalites-content">
+    <h2>Fonctionnalités de <span class = "highlight">Neuvera</span></h2>
+    <div class="section-underline"></div>
+
+    <div class="features-grid">
+  <article class="feature-item">
+  
+    <h3>Analyse EEG instantanée</h3>
+    <p>Interprétation des signaux EEG en temps réel grâce à l'intelligence artificielle.</p>
+  </article>
+
+  <article class="feature-item">
+    
+    <h3>Recommandations intelligentes</h3>
+    <p>Suggestions personnalisées basées sur les profils et résultats des patients.</p>
+  </article>
+
+  <article class="feature-item">
+    
+    <h3>Interface intuitive</h3>
+    <p>Navigation simple et efficace, adaptée à tous les niveaux d'utilisateur.</p>
+  </article>
+
+  <article class="feature-item">
+    
+    <h3>Système multilingue</h3>
+    <p>Accessibilité mondiale grâce au support de plusieurs langues.</p>
+  </article>
+
+  <article class="feature-item">
+    
+    <h3>Sécurité des données</h3>
+    <p>Protection avancée des informations EEG par chiffrement de bout en bout.</p>
+  </article>
+
+  <article class="feature-item">
+   
+    <h3>Compatibilité multi-appareils</h3>
+    <p>Utilisable sur ordinateur, tablette et smartphone sans perte de performance.</p>
+  </article>
+
+  <article class="feature-item">
+   
+    <h3>Rapports détaillés</h3>
+    <p>Génération de rapports clairs et concis pour une meilleure compréhension des résultats.</p>
+  </article>
+  <article class="feature-item">
+   
+    <h3>Mises à jour régulières</h3>
+    <p>Améliorations continues basées sur les retours des utilisateurs et avancées technologiques.</p>
+  </article>
+
+  </div>
+
+
+  </div>
+  </section>
+
+  <section id="apropos" class="apropos-section">
+    <video autoplay loop muted playsinline class="back2-video">
+      <source src="../static/pictures/back2.mp4" type="video/mp4">
+    </video>
+  <div class="apropos-content">
+    <h2>À propos de <span class="highlight1">Neuvera</span></h2>
+    <div class="section-underline1"></div>
+    
+    <div class="vision-block"> 
+      <h3> Notre vision</h3>
+      <p>
+        Chez Neuvera, nous croyons que la compréhension de l'activité cérébrale doit être accessible à tous.
+        Grâce à l’intelligence artificielle, nous simplifions l’analyse EEG pour tous les acteurs de la santé.
       </p>
-      <ul class="features-list">
-        <li> Analyse rapide et précise des tracés EEG</li>
-        <li> Recommandations basées sur les résultats</li>
-        <li> Données sécurisées et personnelles</li>
-        <li> Interface intuitive et multilingue</li>
-      </ul>
-      <a href="#" class="btn-start">COMMENCER MAINTENANT</a>
     </div>
-  </header>
+
+    <div class="vision-block">
+      <h3> Ce que nous faisons</h3>
+      <p>
+        Notre plateforme vous permet d’importer des données EEG, d’obtenir des analyses assistées par IA
+        et de visualiser des résultats clairs, en toute sécurité.
+      </p>
+    </div>
+
+    <div class="vision-block">
+      <h3> Nos engagements</h3>
+      <p>
+        ✅ Données 100% sécurisées<br>
+        ✅ Interface intuitive, multilingue<br>
+        ✅ Conçu avec des professionnels de santé
+      </p>
+    </div>
+
+    <div class="vision-block">
+      <h3> Notre devise</h3>
+      <p><em>"L’intelligence au service de votre cerveau."</em></p>
+    </div>
+
+    <div class="steps-container">
+      <h3 class="steps-title"> Comment réaliser une analyse EEG avec Neuvera ?</h3>
+      <ol class="steps-list">
+        <li><strong>Créer un dossier</strong> pour organiser vos analyses.</li>
+        <li><strong>Ajouter un patient</strong> avec ses informations.</li>
+        <li><strong>Créer un état</strong> (pathologie, contexte ou note clinique).</li>
+        <li><strong>Importer une image EEG</strong> (ou un fichier EEG).</li>
+        <li><strong>Obtenir un résultat</strong> interprété par l'IA.</li>
+        <li><strong>Télécharger votre rapport</strong> en PDF et l’archiver.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2025 Neuvera. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll("header[id], section[id]");
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    function activateNavLink() {
+      let current = "";
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 120; // ajusté à la hauteur de la navbar
+        const sectionHeight = section.offsetHeight;
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${current}`) {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", activateNavLink);
+    activateNavLink(); // pour l'activer dès le chargement
+  });
+</script>
+
+
 </body>
 </html>

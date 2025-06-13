@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Connexion</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/login.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Section gauche - Formulaire -->
+    <div class="form-section">
+      <div class="form-box">
+        <h2>Connexion</h2>
+
+        <form method="POST" action="{{ url_for('auth.login') }}">
+          {{ form.hidden_tag() }}
+
+          <div class="field">
+            {{ form.email.label }}
+            {{ form.email(class_='input', placeholder="Adresse Email") }}
+            {% for error in form.email.errors %}
+              <small style="color:red;">{{ error }}</small>
+            {% endfor %}
+          </div>
+
+          <div class="field">
+            {{ form.password.label }}
+            {{ form.password(class_='input', placeholder="Mot de passe") }}
+            {% for error in form.password.errors %}
+              <small style="color:red;">{{ error }}</small>
+            {% endfor %}
+          </div>
+
+          <div class="pass-link">
+            <a href="{{ url_for('auth.reset_request') }}">Mot de passe oublié ?</a>
+          </div>
+
+          <div class="field btn">
+            {{ form.submit(class_='btn') }}
+          </div>
+        </form>
+
+        <div class="signup-link">
+          Vous n'avez pas de compte ? <a href="{{ url_for('auth.register') }}">Créer un compte</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section droite - Vidéo -->
+    <div class="media-section">
+      <video autoplay loop muted playsinline class="back-video">
+        <source src="{{ url_for('static', filename='pictures/back_video2.mp4') }}" type="video/mp4">
+      </video>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

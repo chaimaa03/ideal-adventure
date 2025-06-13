@@ -15,6 +15,14 @@ class EEGFile(db.Model):
     state_id = db.Column(db.Integer, db.ForeignKey('patient_states.id', ondelete='CASCADE'), nullable=False, unique=True)
     eeg_folder_id = db.Column(db.Integer, db.ForeignKey('eeg_folders.id', ondelete='CASCADE'), nullable=True)
 
+    report = db.relationship(
+    'AnalysisReport',
+    backref='eeg_file',
+    cascade='all, delete-orphan',
+    passive_deletes=True,
+    uselist=False
+    )
+
 
     diagnosis = db.Column(db.String(255), nullable=True)  # ML/DL diagnosis
     confidence_level = db.Column(db.Float, nullable=True)  # Average confidence level

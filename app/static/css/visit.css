@@ -1,182 +1,520 @@
-/* Global Reset and Defaults */
+/* Reset and Global Styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  .hero-content h1 {
-    color: white;
-  }
-  
-  .subtitle {
-    color: white;
-  }
-  
-  .description {
-    color: white;
-  }
-  
-  .features-list {
-    color: white;
-  }
-  
-  .features-list li {
-    color: white;
-  }
-  
-  
-  body {
-    background-image: url("../pictures/background.jpg"); /* ✅ match your folder name exactly */
-    background-size: cover;         /* make it fill the screen */
-    background-repeat: no-repeat;   /* no tiling */
-    background-position: center;    /* center the image */
-    background-attachment: fixed;   /* optional: keeps it fixed while scrolling */
-  }
-  
-  
-  html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-    background-color: #ffffff;
-    background-image: url('../picture/background.jpg');
-    color: white;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Navbar */
-  .navbar {
-    display: flex;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Background Video */
+.vidbackground .background-video {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;    /* give it a bit more breathing room */
-  height: 90px;          /* increase navbar height */
-  background-color: black;
+  padding: 25px 50px;
+  height: 65px;
+  background-color: rgb(0, 0, 0);
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   z-index: 1000;
-  }
-  
-  .nav-logo {
-    width: 180px;         /* bigger width */
-  max-height: 80px;     /* allow more height */
+  font-size: 20px;
+}
+
+.nav-logo {
+  width: 200px;
+  max-height: 150px;
   object-fit: contain;
-  padding: 5px 0;
-  }
+  padding: 0;
+}
+
+.nav-links a {
+  position: relative;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  margin: 0 10px;
+}
+
+/* hover OU lien actif */
+.nav-links a:hover,
+.nav-links a.active {
+  color: #ff00e1;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #ff00e1;
+}
+
+
+a.login,
+.nav-links .login {
+  background-color: transparent;
+  border: 2px solid #640970;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Oswald', sans-serif;
+  margin: 0 10px;
+}
+
+a.login:hover,
+.nav-links .login:hover {
+  background-color: #ffffff;
+  color: rgb(121, 0, 161);
+  box-shadow: 0 0 10px #d102ff;
+}
+
+/* Bouton S'inscrire = style plein */
+button.register,
+.nav-links .register {
+  background-color: #aa00c8;
+  color: white;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Oswald', sans-serif;
+  margin: 0 10px;
+}
+
+button.register:hover,
+.nav-links .register:hover {
+  background-color: white;
+  color: #aa00c8;
+  box-shadow: 0 0 10px #aa00c8;
+}
+
+
+
+/* Hero Section */
+.hero {
+  display: flex;
+  color: #ffffff;
+  justify-content: space-between;
+  align-items: center;
+  padding: 150px 48px 60px;
+  width: 100%;
+}
+
+.hero-content {
+  max-width: 600px;
   
-  .nav-links a {
-    margin: 0 15px;
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    position: relative;
-    transition: color 0.3s ease;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+  font-family: 'Libre Baskerville', serif;
+  color: white;
+}
+
+.highlight {
+  background: linear-gradient(90deg, #c402ff, #fc0599, #6d0cff);
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0% center;
   }
-  
-  .nav-links a.active,
-  .nav-links a:hover {
-    color: #5f5f5f;
+  100% {
+    background-position: 200% center;
   }
-  
-  .nav-links a.active::after,
-  .nav-links a:hover::after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #515151;
-  }
-  
-  /* Hero Section */
+}
+
+.subtitle {
+  font-size: 20px;
+  color: rgb(176, 115, 255);
+  margin-bottom: 30px;
+  margin-left: 60px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.description {
+  font-size: 16px;
+  padding: 25px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  text-align: justify;
+  font-family: 'Oswald', sans-serif;
+  color: white;
+  border: 4px groove rgb(255, 0, 234);
+  border-radius: 10px;
+  background-color: rgba(62, 0, 63, 0.355);
+}
+
+/* Typed.js Auto Typing */
+.features-auto {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+  margin-top: 30px;
+}
+
+/* Container du bouton */
+.hero-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Bouton principal */
+.btn-start {
+  background-color: rgb(141, 0, 141);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Chau Philomene One', sans-serif;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* Le texte à l'intérieur (span) */
+.btn-start span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+/* La flèche qui apparaît au survol */
+.btn-start span::after {
+  content: '\00bb'; /* >> */
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+/* Animation au hover */
+.btn-start:hover span {
+  padding-right: 25px;
+}
+
+.btn-start:hover span::after {
+  opacity: 1;
+  right: 0;
+}
+
+/* Changement de fond au hover */
+.btn-start:hover {
+  background-color: black;
+  color: rgb(176, 115, 255);
+  border: 2px groove purple; /* bordure visible après hover */
+}
+
+/* Features List */
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 40px;
+  font-family: 'Oswald', sans-serif;
+  color: white;
+}
+
+.features-list li {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
   .hero {
-    display: flex;
-    color: #ffffff;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-    justify-content: space-between;
-    align-items: center;
-    padding: 120px 40px 60px;
+    flex-direction: column;
+    padding: 100px 20px 40px;
+    align-items: flex-start;
+  }
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .background-video,
+  .back2-video {
     width: 100%;
-    background-image: url("../pictures/background.jpg"); /* ✅ match your folder name exactly */
-    background-size: cover;         /* make it fill the screen */
-    background-repeat: no-repeat;   /* no tiling */
-    background-position: center;    /* center the image */
-    background-attachment: fixed; 
+    height: auto;
   }
-  
-  .hero-content {
-    max-width: 600px;
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .background-video,
+  .back2-video {
+    width: auto;
+    height: 100%;
   }
+}
+
+
+/* main */ 
+
+.fonctionnalites-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
   
-  .hero-content h1 {
-    font-size: 48px;
-    margin-bottom: 10px;
-    font-family: 'Libre Baskerville', serif;
-    color: white;
+  flex-direction: column;
+  color: white;
+}
+
+.back2-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Contenu par-dessus la vidéo */
+.fonctionnalites-content {
+  z-index: 1;
+  padding: 60px 20px;
+}
+
+.fonctionnalites-content h2 {
+  font-size: 48px;
+  margin-bottom: 10px;
+  font-family: 'Libre Baskerville', serif;
+  color: white;
+  text-align: center;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid #ff00e1;
+  border-radius: 16px;
+  padding: 25px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 15px #ff00e1;
+}
+
+.feature-item h3 {
+  color: rgb(176, 115, 255);
+  margin: 15px 0 10px;
+  font-size: 18px;
+  text-shadow: 0 0 2px rgb(176, 115, 255);;
+}
+
+.feature-item p {
+  color: #dddddd;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.feature-item .icon {
+  font-size: 30px;
+  color: #ff00e1;
+}
+
+.section-underline {
+  width: 0;
+  height: 3px;
+  margin: 10px auto 30px;
+  background: linear-gradient(to right, #ff00e1, #00c3ff);
+  border-radius: 0%;
+  animation: underlineGrow 5s ease forwards;
+}
+
+@keyframes underlineGrow {
+  to {
+    width: 570px
   }
-  
-  .highlight {
-    color: white;
-    font-weight: bold;
-    font-family: 'Cormorant Garamond', serif;
+}
+
+/* === À propos Section avec vidéo de fond === */
+.apropos-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  color: white;
+  z-index: 1;
+  flex-direction: column;
+  text-align: center;
+}
+
+.apropos-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+.apropos-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.apropos-content h2 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: #ffffff;
+  font-family: 'Libre Baskerville', serif;
+}
+
+/* Vision, Mission, Engagements */
+.vision-block {
+  margin-bottom: 40px;
+  text-align: left;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  border: 1px solid #ff00e1;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 0, 225, 0.2);
+}
+
+.vision-block h3 {
+  color: rgb(176, 115, 255);
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.vision-block p {
+  color: #dddddd;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Étapes d'utilisation */
+.steps-container {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid #ff00e1;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: left;
+  margin-top: 40px;
+  box-shadow: 0 0 10px rgba(255, 0, 225, 0.1);
+}
+
+.steps-title {
+  font-size: 22px;
+  color: rgb(176, 115, 255);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.steps-list {
+  list-style: decimal;
+  padding-left: 20px;
+}
+
+.steps-list li {
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #f0f0f0;
+}
+
+
+.footer {
+  background-color: #0a0010;
+  padding: 20px 0;
+  text-align: center;
+  color: #ccc;
+  font-size: 14px;
+  border-top: 1px solid #333;
+}
+
+.footer-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.highlight1 {
+  background: linear-gradient(90deg, #c402ff, #fc0599, #6d0cff);
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0% center;
   }
-  
-  .subtitle {
-    font-size: 20px;
-    color: white;
-    margin-bottom: 30px;
-    margin-left: 60px;
-    
-    font-family: 'Cormorant Garamond', serif;
+  100% {
+    background-position: 200% center;
   }
-  
-  .description {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    font-family: 'Oswald', sans-serif;
-    color: white;
+}
+
+.section-underline1 {
+  width: 0;
+  height: 3px;
+  margin: 10px auto 30px;
+  background: linear-gradient(to right, #ff00e1, #00c3ff);
+  border-radius: 0%;
+  animation: underlineGrow1 5s ease forwards;
+}
+
+@keyframes underlineGrow1 {
+  to {
+    width: 335px
   }
-  
-  /* Features List */
-  .features-list {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 40px;
-    font-family: 'Oswald', sans-serif;
-    color: white;
-  }
-  
-  .features-list li {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  
-  /* Call-to-Action Button */
-  .btn-start {
-    background-color: rgb(51, 227, 221);
-    color: white;
-    padding: 12px 30px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
-    font-family: 'Chau Philomene One', sans-serif;
-    transition: background 0.3s ease;
-  }
-  
-  .btn-start:hover {
-    background-color: gainsboro;
-  }
-  
-  /* Responsive (optional, future-proof) */
-  @media (max-width: 768px) {
-    .hero {
-      flex-direction: column;
-      padding: 100px 20px 40px;
-      align-items: flex-start;
-    }
-  }
-  
+}

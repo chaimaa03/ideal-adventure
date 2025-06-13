@@ -6,12 +6,16 @@
 <body>
     <h1>Patient List</h1>
     <a href="{{ url_for('eeg_folder.add_patient') }}">Add Patient</a>
+    
     <ul>
         {% for patient in patients %}
         <li>
             <a href="{{ url_for('eeg_folder.get_patient_eeg_files', patient_id=patient.id) }}">
                 {{ patient.first_name }} {{ patient.last_name }}
             </a>
+            <form action="{{ url_for('eeg_folder.delete_patient', patient_id=patient.id) }}" method="POST" style="display:inline;">
+                <button type="submit" onclick="return confirm('Confirmer la suppression du patient ?');">🗑️ Supprimer</button>
+            </form>
         </li>
         {% endfor %}
     </ul>       

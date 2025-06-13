@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Neuvera</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard/dashboard.css') }}">
+   <link rel="icon" href="{{ url_for('static', filename='pics/NEUVERA2.png') }}" type="image/png">
+</head>
+<body>
+
+  <!-- Barre de navigation -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='pics/NEUVERA1.png') }}" alt="Logo Neuvera" class="logo">
+    </div>
+    <ul>
+      <li><a href="/profile">Profil</a></li>
+      <li><a href="/settings">Paramètres</a></li>
+      <li><a href="/history">Historique</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard">
+
+    <!-- Dernière analyse -->
+    <section class="card centered">
+      <h2>Dernière Analyse</h2>
+      {% if last_analysis %}
+        <p><strong>Patient :</strong> {{ last_analysis.patient_name }}</p>
+        <p><strong>Diagnostic :</strong> {{ last_analysis.diagnosis }}</p>
+        <p><strong>Confidence :</strong> {{ last_analysis.accuracy }}%</p>
+        <p><strong>Date :</strong> {{ last_analysis.date }}</p>
+        <p><strong>Fichier EEG :</strong> {{ last_analysis.file_name }}</p>
+        <a href="/history" class="btn">Voir l'historique</a>
+      {% else %}
+        <p>Aucune analyse enregistrée.</p>
+      {% endif %}
+    </section>
+
+    <!-- Statistiques -->
+    <section class="stats">
+      <div class="stat card centered">
+        <h3>Total d'Analyses</h3>
+        <p>{{ total_analyses }}</p>
+      </div>
+      <div class="stat card centered">
+        <h3>Diagnostic le plus fréquent</h3>
+        <p>{{ most_common_diagnosis }} ({{ accuracy_percentage }}%)</p>
+      </div>
+      <div class="stat card centered">
+        <h3>Total de Patients</h3>
+        <p>{{ total_patients }}</p>
+      </div>
+    </section>
+
+    <!-- Démarrer une nouvelle analyse -->
+    <section class="start-analysis card centered">
+      <a href="/api/dashboard/folder" class="btn-primary">Démarrer une nouvelle analyse</a>
+    </section>
+
+  </main>
+
+</body>
+</html>
