@@ -61,7 +61,11 @@ def login():
 def reset_request():
     form=ResetPasswordRequestForm()
     if request.method == 'POST':
-        email = request.form['email']
+        email = request.form.get('email')
+        if not email:
+           flash("Adresse email manquante.", "danger")
+           return redirect(url_for('auth.reset_request'))
+
         user = User.query.filter_by(email=email).first()
 
         if user:

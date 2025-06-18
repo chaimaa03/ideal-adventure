@@ -9,7 +9,7 @@
 
 /* ---- Structure générale ---- */
 body {
-  background: linear-gradient(135deg, #4c1a6a, #1a1a2e);
+ background: linear-gradient(100deg, #4c1a6a, #1a1a2e, rgb(255, 0, 234));
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -20,41 +20,79 @@ body {
   width: 100%;
   height: 100vh;
   display: flex;
-  flex-direction: row-reverse; /* Formulaire à droite, vidéo à gauche */
+  flex-direction: row; /* Formulaire à droite, vidéo à gauche */
   overflow: hidden;
 }
 
-/* ---- Section formulaire (droite) ---- */
-.form-section {
+/* ---- Section vidéo (gauche) ---- */
+.video-section {
   width: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-section video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(4px);
+  transform: scale(1.05);
+}
+
+/* ---- Section formulaire (droite) ---- */
+.register-section {
+  width: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
   padding: 60px 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
 }
 
 .form-box {
   width: 100%;
   max-width: 400px;
-  color: #fff;
+  background: transparent;
+  color: white;
+  margin-top: -70px;
+  margin-bottom: -70px;
+  padding: 20px;
+  border-radius: 10px;
+  
+  /*box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);*/
+  text-align: center;
 }
+
+   .form-logo {
+  display: block;
+  margin: auto;
+  margin-bottom: 0px;;
+  margin-top: -20px;
+
+  width: 200px;
+  height: 168px;
+}
+
 
 .form-box h2 {
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 1.8em;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  font-size: 32px;
 }
 
 .field {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  margin-left: -40px;
+  margin-right: -40px;
 }
 
 .field label {
   display: block;
   margin-bottom: 5px;
   color: #ddd;
+  text-align: left;
   font-size: 0.95em;
 }
 
@@ -66,6 +104,8 @@ body {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
   font-size: 0.95em;
+  transition: all 0.3s ease;
+  cursor: text;
 }
 
 .field input::placeholder {
@@ -73,8 +113,9 @@ body {
 }
 
 .field input:focus {
-  outline: 2px solid #ff00d9;
-  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #ff00d9;
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
 }
 
 small {
@@ -84,10 +125,12 @@ small {
   font-size: 0.85em;
 }
 
+/* ---- Bouton ---- */
 .btn input[type="submit"] {
   width: 100%;
   padding: 12px;
   border: none;
+  margin-top: 12px;
   border-radius: 6px;
   font-weight: bold;
   font-size: 1em;
@@ -101,7 +144,7 @@ small {
   opacity: 0.9;
 }
 
-/* ---- Liens ---- */
+/* ---- Lien vers login ---- */
 .login-link {
   text-align: center;
   font-size: 0.95em;
@@ -119,38 +162,42 @@ small {
   text-decoration: underline;
 }
 
-/* ---- Section vidéo (gauche) ---- */
-.media-section {
-  width: 50%;
-  position: relative;
-  overflow: hidden;
-}
-
-.back-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: blur(4px);
-  transform: scale(1.05);
-}
-
 /* ---- Responsive ---- */
 @media screen and (max-width: 768px) {
   .container {
     flex-direction: column;
   }
 
-  .media-section,
-  .form-section {
+  .video-section,
+  .register-section {
     width: 100%;
     height: 50vh;
   }
 
-  .form-section {
+  .register-section {
     padding: 40px 20px;
   }
 
+ 
+
   .form-box h2 {
     font-size: 1.5em;
+    
   }
+}
+
+.flashes {
+    margin-bottom: 15px;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.flashes li {
+    background-color: #ffe0e0;
+    border-left: 5px solid #ff4d4d;
+    color: #a10000;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 0.95em;
 }

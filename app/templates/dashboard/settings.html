@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Paramètres</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard/settings.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='pictures/NEUVERA2.png') }}" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='pictures/NEUVERA1.png') }}" alt="Logo Neuvera">
+    </div>
+    <ul>
+      <li><a href="/api/dashboard" class="{% if request.path == '/api/dashboard/' %}active{% endif %}">Accueil</a></li>
+      <li><a href="/api/dashboard/profile" class="{% if request.path == '/api/dashboard/profile' %}active{% endif %}">Profil</a></li>
+      <li><a href="/api/dashboard/settings" class="{% if request.path == '/api/dashboard/settings' %}active{% endif %}">Paramètres</a></li>
+    </ul>
+  </nav>
+
+  <!-- Contenu principal -->
+  <div class="settings-container">
+    <h2>Paramètres du compte</h2>
+
+    <div class="setting-section">
+      <h3><i class="fas fa-lock"></i> Changer le mot de passe</h3>
+      <form method="POST" action="{{ url_for('dashboard.settings') }}">
+        <div class="field">
+          <label for="current_password">Mot de passe actuel</label>
+          <input type="password" name="current_password" required>
+        </div>
+        <div class="field">
+          <label for="new_password">Nouveau mot de passe</label>
+          <input type="password" name="new_password" required>
+        </div>
+        <div class="field">
+          <label for="confirm_password">Confirmer le mot de passe</label>
+          <input type="password" name="confirm_password" required>
+        </div>
+        <div class="field btn">
+          <button type="submit">Mettre à jour</button>
+        </div>
+      </form>
+    </div>
+
+    <div  class="setting-section">
+      <h3><i class="fa-solid fa-language"></i> Langue de l'application</h3>
+      <p>Choisissez la langue de l'interface (fonction non encore disponible)</p>
+      <select disabled>
+        <option selected>Français</option>
+        <option>Anglais</option>
+        <option>Arabe</option>
+      </select>
+    </div>
+
+</body>
+</html>

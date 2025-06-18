@@ -1,24 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
-    <title>Patient List</title>
+  <meta charset="UTF-8">
+  <title>Liste des Patients - Neuvera</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/folder_list.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='pictures/NEUVERA2.png') }}" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-    <h1>Patient List</h1>
-    <a href="{{ url_for('eeg_folder.add_patient') }}">Add Patient</a>
-    
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='pictures/NEUVERA1.png') }}" alt="Logo Neuvera">
+    </div>
     <ul>
+      <li><a href="/api/dashboard" class="{% if request.path == '/api/dashboard/' %}active{% endif %}">Accueil</a></li>
+      <li><a href="/api/dashboard/profile"
+          class="{% if request.path == '/api/dashboard/profile' %}active{% endif %}">Profil</a></li>
+      <li><a href="/api/dashboard/settings"
+          class="{% if request.path == '/api/dashboard/settings' %}active{% endif %}">Paramètres</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <header class="header">
+      <h1>Vos Patients !</h1>
+
+      <a href="{{ url_for('eeg_folder.add_patient') }}" class="add-btn">
+        <i class="fas fa-user-plus"></i>
+      </a>
+
+    </header>
+
+    <table class="patients-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Date de Naissance</th>
+          <th>Sexe</th>
+          <th>Créé le</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
         {% for patient in patients %}
-        <li>
-            <a href="{{ url_for('eeg_folder.get_patient_eeg_files', patient_id=patient.id) }}">
-                {{ patient.first_name }} {{ patient.last_name }}
+        <tr>
+          <td>{{ patient.id }}</td>
+          <td>{{ patient.first_name }} {{ patient.last_name }}</td>
+          <td>{{ patient.birth_date.strftime('%Y-%m-%d') }}</td>
+          <td>{{ patient.sex }}</td>
+          <td>{{ patient.created_at.strftime('%Y-%m-%d') }}</td>
+          <td>
+
+            <a href="{{ url_for('eeg_folder.get_patient_eeg_files', patient_id=patient.id) }}" class="info-btn"
+              title="Voir détails">
+              <i class="fas fa-eye"></i>
             </a>
-            <form action="{{ url_for('eeg_folder.delete_patient', patient_id=patient.id) }}" method="POST" style="display:inline;">
-                <button type="submit" onclick="return confirm('Confirmer la suppression du patient ?');">🗑️ Supprimer</button>
-            </form>
-        </li>
+          </td>
+        </tr>
         {% endfor %}
-    </ul>       
-       
+      </tbody>
+    </table>
+  </main>
+
 </body>
-</html>

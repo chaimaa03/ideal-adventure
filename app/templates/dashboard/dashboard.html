@@ -2,40 +2,44 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Neuvera</title>
+  <title>Accueil</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard/dashboard.css') }}">
-   <link rel="icon" href="{{ url_for('static', filename='pics/NEUVERA2.png') }}" type="image/png">
+  <link rel="icon" href="{{ url_for('static', filename='pictures/NEUVERA2.png') }}" type="image/png">
 </head>
-<body>
 
-  <!-- Barre de navigation -->
+<body>
+  <!-- Video de fond -->
+ 
+
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">
-      <img src="{{ url_for('static', filename='pics/NEUVERA1.png') }}" alt="Logo Neuvera" class="logo">
+      <img src="{{ url_for('static', filename='pictures/NEUVERA1.png') }}" alt="Logo Neuvera">
     </div>
     <ul>
-      <li><a href="/profile">Profil</a></li>
-      <li><a href="/settings">Paramètres</a></li>
-      <li><a href="/history">Historique</a></li>
+      <li><a href="/api/dashboard" class="{% if request.path == '/api/dashboard/' %}active{% endif %}">Accueil</a></li>
+      <li><a href="/api/dashboard/profile" class="{% if request.path == '/api/dashboard/profile' %}active{% endif %}">Profil</a></li>
+      <li><a href="/api/dashboard/settings" class="{% if request.path == '/api/dashboard/settings' %}active{% endif %}">Paramètres</a></li>
     </ul>
   </nav>
 
+  <!-- Dashboard -->
   <main class="dashboard">
-
     <!-- Dernière analyse -->
     <section class="card centered">
-      <h2>Dernière Analyse</h2>
-      {% if last_analysis %}
-        <p><strong>Patient :</strong> {{ last_analysis.patient_name }}</p>
-        <p><strong>Diagnostic :</strong> {{ last_analysis.diagnosis }}</p>
-        <p><strong>Confidence :</strong> {{ last_analysis.accuracy }}%</p>
-        <p><strong>Date :</strong> {{ last_analysis.date }}</p>
-        <p><strong>Fichier EEG :</strong> {{ last_analysis.file_name }}</p>
-        <a href="/history" class="btn">Voir l'historique</a>
-      {% else %}
-        <p>Aucune analyse enregistrée.</p>
-      {% endif %}
-    </section>
+  <h2>Dernière Analyse</h2>
+  {% if last_analysis %}
+  <div class="horizontal-info">
+    <p><strong>Patient :</strong> {{ last_analysis.patient_name }}</p>
+    <p><strong>Date :</strong> {{ last_analysis.date }}</p>
+    <p><strong>Âge :</strong> {{ last_analysis.age }}</p>
+    <p><strong>Sexe :</strong> {{ last_analysis.sex }}</p>
+  </div>
+  <a href="/api/dashboard/folder" class="btn">Voir l'historique</a>
+  {% else %}
+  <p>Aucune analyse enregistrée.</p>
+  {% endif %}
+</section>
 
     <!-- Statistiques -->
     <section class="stats">
@@ -53,12 +57,12 @@
       </div>
     </section>
 
-    <!-- Démarrer une nouvelle analyse -->
-    <section class="start-analysis card centered">
+    <!-- Nouvelle analyse -->
+    
+  
       <a href="/api/dashboard/folder" class="btn-primary">Démarrer une nouvelle analyse</a>
-    </section>
-
+    
+    
   </main>
-
 </body>
 </html>

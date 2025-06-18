@@ -4,7 +4,6 @@ from .patient import Patient
 from .patient_state import PatientState
 from .eeg_file import EEGFile
 from .eeg_folder import EEGFolder
-from .history import History
 from .AnalysisReport import AnalysisReport
 
 

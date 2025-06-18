@@ -1,35 +1,59 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
-  <title>Nouvel État - Examen Schizophrénie</title>
+  <title>Add state - Neuvera</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/add_state.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='pictures/NEUVERA2.png') }}" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='pictures/NEUVERA1.png') }}" alt="Logo Neuvera">
+    </div>
+    <ul>
+      <li><a href="/api/dashboard" class="{% if request.path == '/api/dashboard/' %}active{% endif %}">Accueil</a></li>
+      <li><a href="/api/dashboard/profile"
+          class="{% if request.path == '/api/dashboard/profile' %}active{% endif %}">Profile</a></li>
+      <li><a href="/api/dashboard/settings"
+          class="{% if request.path == '/api/dashboard/settings' %}active{% endif %}">Paramètres</a></li>
+    </ul>
+  </nav>
+
+
   <main class="container">
 
-    <h2>Ajouter un état pour le patient : {{ patient.first_name }} {{ patient.last_name }}</h2>
+    <h2>
+      Ajouter un état pour le patient<br>
+      <span class="patient-name"> {{ patient.first_name }} {{ patient.last_name }}</span>
+    </h2>
     {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-      <ul>
-        {% for category, message in messages %}
-          <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %}
+    {% if messages %}
+    <ul>
+      {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
     {% endwith %}
 
-    <form action="{{ url_for('eegfile.create_eegfile', patient_id=patient.id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ url_for('eegfile.create_eegfile', patient_id=patient.id) }}" method="POST"
+      enctype="multipart/form-data">
       <fieldset>
         <legend>Examen neurologique ciblé schizophrénie</legend>
 
-        <label for="weight">Poids (kg) :</label>
+        <label for="weight"><i class="fas fa-weight-hanging"></i> Poids (kg) :</label>
         <input type="number" name="weight" step="0.1" placeholder="Exemple : 70.5" required>
 
-        <label for="height">Taille (cm) :</label>
+        <label for="height"><i class="fas fa-ruler-vertical"></i> Taille (cm) :</label>
         <input type="number" name="height" step="0.1" placeholder="Exemple : 180.0" required>
 
-        <label for="suspicion_level">Niveau de suspicion :</label>
+        <label for="suspicion_level"><i class="fas fa-exclamation-triangle"></i> Niveau de suspicion :</label>
         <select name="suspicion_level" required>
           <option value="">-- Sélectionner --</option>
           <option value="Faible">Faible</option>
@@ -37,44 +61,53 @@
           <option value="Élevé">Élevé</option>
         </select>
 
-        <label for="symptoms">Symptômes observés :</label>
-        <textarea name="symptoms" rows="3" placeholder="Hallucinations, délires, troubles de la pensée..." required></textarea>
+        <label for="symptoms"><i class="fas fa-brain"></i> Symptômes observés :</label>
+        <textarea name="symptoms" rows="3" placeholder="Hallucinations, délires, troubles de la pensée..."
+          required></textarea>
 
-        <label for="family_history">Antécédents familiaux de schizophrénie :</label>
+        <label for="family_history"><i class="fas fa-users"></i> Antécédents familiaux de schizophrénie :</label>
         <select name="family_history" required>
           <option value="Oui">Oui</option>
           <option value="Non">Non</option>
         </select>
 
-        <label for="cognitive_score">Évaluation cognitive :</label>
+        <label for="cognitive_score"><i class="fas fa-puzzle-piece"></i> Évaluation cognitive :</label>
         <input type="text" name="cognitive_score" placeholder="Score ou notes">
 
-        <label for="motor_observation">Coordination motrice :</label>
+        <label for="motor_observation"><i class="fas fa-running"></i> Coordination motrice :</label>
         <select name="motor_observation">
           <option value="Normale">Normale</option>
           <option value="Anormale">Anormale</option>
         </select>
 
-        <label for="speech_notes">Observations sur la parole :</label>
+        <label for="speech_notes"><i class="fas fa-comment-dots"></i> Observations sur la parole :</label>
         <textarea name="speech_notes" rows="2"></textarea>
 
-        <label for="social_behavior">Comportement social :</label>
+        <label for="social_behavior"><i class="fas fa-people-arrows"></i> Comportement social :</label>
         <textarea name="social_behavior" rows="2"></textarea>
-
       </fieldset>
 
       <fieldset>
         <legend>Fichier EEG</legend>
-
-        <label for="eeg_file">Importer un fichier EEG (.edf) :</label>
-        <input type="file" name="eeg_file" accept=".edf" required>
+<label for="eeg_file" class="custom-file-label">
+  <i class="fas fa-upload"></i> Importer un fichier EEG (.edf)
+</label>
+<input type="file" name="eeg_file" id="eeg_file" accept=".edf" required hidden>
       </fieldset>
 
       <button type="submit">Soumettre l'examen</button>
     </form>
 
-    <a href="{{ url_for('eeg_folder.get_patient_eeg_files', patient_id=patient.id) }}" class="back-link">← Retour au patient</a>
+    <a href="{{ url_for('eeg_folder.get_patient_eeg_files', patient_id=patient.id) }}" class="back-link">← Retour au
+      patient</a>
 
   </main>
+  <script>
+  document.querySelector('.custom-file-label').addEventListener('click', function () {
+    document.querySelector('#eeg_file').click();
+  });
+</script>
 </body>
+
 </html>
+

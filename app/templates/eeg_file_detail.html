@@ -1,79 +1,196 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <title>EEG File Details</title>
+  <meta charset="UTF-8">
+  <title>Rapport - Neuvera</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/eeg_file_detail.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='pictures/NEUVERA2.png') }}" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
+
 <body>
-    <h1>EEG File Details</h1>
 
-    <!-- Section 1: Patient State -->
-    <h2>Patient State</h2>
-    {% if state %}
-      <p><strong>Weight:</strong> {{ state.weight }} kg</p>
-      <p><strong>Height:</strong> {{ state.height }} cm</p>
-      <p><strong>Suspicion Level:</strong> {{ state.suspicion_level }}</p>
-      <p><strong>Symptoms:</strong> {{ state.symptoms }}</p>
-      <p><strong>Family History:</strong> {{ state.family_history }}</p>
-      <p><strong>Cognitive Score:</strong> {{ state.cognitive_score }}</p>
-      <p><strong>Motor Observation:</strong> {{ state.motor_observation }}</p>
-      <p><strong>Speech Notes:</strong> {{ state.speech_notes }}</p>
-      <p><strong>Social Behavior:</strong> {{ state.social_behavior }}</p>
-    {% else %}
-        <p>No state information available.</p>
-    {% endif %}
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='pictures/NEUVERA1.png') }}" alt="Logo Neuvera">
+    </div>
+    <ul>
+      <li><a href="/api/dashboard" class="{% if request.path == '/api/dashboard/' %}active{% endif %}">Accueil</a></li>
+      <li><a href="/api/dashboard/profile"
+          class="{% if request.path == '/api/dashboard/profile' %}active{% endif %}">Profile</a></li>
+      <li><a href="/api/dashboard/settings"
+          class="{% if request.path == '/api/dashboard/settings' %}active{% endif %}">Paramètres</a></li>
+    </ul>
+  </nav>
 
-    <!-- Section 2: EEG File -->
-    <h2>EEG File</h2>
-    <p>
-        Le fichier EEG analysé est nommé <strong>{{ eegfile.file_name }}</strong> et a été correctement importé depuis le chemin suivant :
-        <code>{{ eegfile.file_path }}</code>.
-    </p>
+  <!-- Rapport -->
+  <main class="report-container" id="report-content">
 
-    <!-- Section 3: Analysis Report -->
-    <h2>Analysis Report</h2>
+    <h1>Dossier EEG - Rapport d'analyse</h1>
+
     {% if report %}
-    <main class="report-container">
+    <section class="medical-report">
+      <div class="section-title">
+        <h2>Données Patient</h2>
+      </div>
+      <table>
+        <tr>
+          <th>Nom complet :</th>
+          <td>{{ patient.first_name }} {{ patient.last_name }}</td>
+        </tr>
+        <tr>
+          <th>Âge :</th>
+          <td>{{ report.patient_age }} ans</td>
+        </tr>
+        <tr>
+          <th>Sexe :</th>
+          <td>{{ patient.sex }}</td>
+        </tr>
+        <tr>
+          <th>Date EEG :</th>
+          <td>{{ report.analyzed_at.strftime('%d/%m/%Y à %H:%M') }}</td>
+        </tr>
+      </table>
 
-        <h2>Rapport Médical - Analyse EEG</h2>
       
-        <p>
-          Le patient <strong>{{ patient.first_name }} {{ patient.last_name }}</strong>, âgé de <strong>{{ report.patient_age }}</strong> ans, de sexe <strong>{{ patient.sex }}</strong>, a subi un examen EEG le <strong>{{ report.analyzed_at.strftime('%d/%m/%Y à %H:%M') }}</strong>.
-        </p>
-      
-        <p>
-          Les données EEG ont été analysées à l'aide de deux approches d'intelligence artificielle :
-          un modèle <strong>Machine Learning</strong> a indiqué un diagnostic de <strong>{{ report.diagnosis.split('/')[0].replace('ML:', '').strip() }}</strong>,
-          tandis que le modèle <strong>Deep Learning</strong> a conclu à <strong>{{ report.diagnosis.split('/')[1].replace('DL:', '').strip() }}</strong>.
-          Le niveau de confiance global moyen est estimé à <strong>{{ report.confidence_level }}%</strong>.
-        </p>
-      
-        <p>
-          L'analyse des rythmes cérébraux a révélé un schéma <strong>{{ report.rhythm_analysis.lower() }}</strong>.
-        </p>
-      
-        <p>
-          Sur le plan clinique, le patient présente un poids de <strong>{{ state.weight }} kg</strong> pour une taille de <strong>{{ state.height }} cm</strong>.
-          Le niveau de suspicion clinique a été évalué comme <strong>{{ state.suspicion_level.lower() }}</strong>, avec les symptômes suivants observés :
-          <em>{{ state.symptoms }}</em>.
-          Les antécédents familiaux de schizophrénie sont indiqués comme <strong>{{ state.family_history }}</strong>.
-        </p>
-      
-        <p>
-          L’évaluation cognitive rapporte : <strong>{{ state.cognitive_score or "Non spécifié" }}</strong>.
-          La coordination motrice est <strong>{{ state.motor_observation }}</strong>,
-          tandis que les observations sur la parole indiquent : <em>{{ state.speech_notes or "aucune remarque" }}</em>.
-          Le comportement social observé est décrit comme : <em>{{ state.social_behavior or "non rapporté" }}</em>.
-        </p>
-      
-        <p>
-          En conclusion, le rapport suggère une attention particulière aux symptômes observés et recommande un suivi régulier.
-          Il est conseillé de consulter un spécialiste pour une évaluation plus approfondie et un plan de traitement adapté.
-        </p>
-      </main>
-      
+      <div class="section-title">
+        <h2>Examen Clinique</h2>
+      </div>
+      <table>
+        <tr>
+          <th>Poids :</th>
+          <td>{{ state.weight }} kg</td>
+        </tr>
+        <tr>
+          <th>Taille :</th>
+          <td>{{ state.height }} cm</td>
+        </tr>
+        <tr>
+          <th>Niveau de suspicion :</th>
+          <td>{{ state.suspicion_level }}</td>
+        </tr>
+        <tr>
+          <th>Symptômes :</th>
+          <td>{{ state.symptoms }}</td>
+        </tr>
+        <tr>
+          <th>Antécédents familiaux :</th>
+          <td>{{ state.family_history }}</td>
+        </tr>
+        <tr>
+          <th>Score Cognitif :</th>
+          <td>{{ state.cognitive_score or "Non spécifié" }}</td>
+        </tr>
+        <tr>
+          <th>Coordination motrice :</th>
+          <td>{{ state.motor_observation }}</td>
+        </tr>
+        <tr>
+          <th>Parole :</th>
+          <td>{{ state.speech_notes or "aucune remarque" }}</td>
+        </tr>
+        <tr>
+          <th>Comportement social :</th>
+          <td>{{ state.social_behavior or "non rapporté" }}</td>
+        </tr>
+      </table>
+
+      <div class="section-title">
+  <h2>Conclusion</h2>
+</div>
+
+{% set ml_diag = report.diagnosis.split('/')[0].replace('ML:', '').strip().lower() %}
+{% set dl_diag = report.diagnosis.split('/')[1].replace('DL:', '').strip().lower() %}
+
+<p>
+  Les données EEG ont été analysées à l'aide de deux approches d'intelligence artificielle :
+  un modèle Machine Learning a indiqué un diagnostic de {{ report.diagnosis.split('/')[0].replace('ML:', '').strip() }},
+  tandis que le modèle Deep Learning a conclu à {{ report.diagnosis.split('/')[1].replace('DL:', '').strip() }}.
+  Le niveau de confiance global moyen est estimé à {{ report.confidence_level }}%.
+</p>
+
+{% if ml_diag == 'sain' and dl_diag == 'sain' %}
+<p>
+  Le patient ne présente aucun signe d’activité anormale selon l’analyse EEG.<br>
+  Aucun élément préoccupant n’a été détecté. Un contrôle de routine peut suffire.
+</p>
+
+{% elif ml_diag == 'schizophrène' and dl_diag == 'schizophrène' %}
+<p>
+  Les résultats de l'analyse EEG sont cohérents avec les manifestations caractéristiques d’un trouble de type
+  <strong>schizophrénique</strong>.<br>
+  Ces résultats indiquent une altération significative de l'activité cérébrale typique, nécessitant une attention
+  particulière quant à l'évolution de l’état du patient.
+</p>
+
+{% elif (ml_diag == 'schizophrène' and dl_diag == 'sain') or (ml_diag == 'sain' and dl_diag == 'schizophrène') %}
+<p>
+  Le tableau clinique actuel ne permet pas d’affirmer avec certitude un diagnostic de schizophrénie. 
+  Certains signes évocateurs sont présents, mais restent insuffisamment spécifiques à ce stade. 
+  Une surveillance régulière ainsi qu’un complément d’évaluation (clinique, psychologique et/ou neurophysiologique) sont recommandés afin de confirmer ou d’infirmer l’hypothèse diagnostique.
+</p>
+
+{% else %}
+<p>
+  Les résultats suggèrent une vigilance particulière au vu des symptômes rapportés.<br>
+  L’activité cérébrale nécessite une interprétation nuancée selon les données observées.
+</p>
+{% endif %}
+    </section>
+
     {% else %}
-        <p>No analysis report available.</p>
+    <p>Aucun rapport d'analyse disponible.</p>
     {% endif %}
+
+    <div class="report-footer">
+      <span class="footer-left">Rapport généré par <strong>Neuvera</strong></span>
+      <span class="footer-right">Le : <span id="download-date"></span></span>
+    </div>
+
+  </main>
+  <div class="pdf-btn-container">
+    <button class="btn-download" onclick="downloadPDF()">
+      <i class="fas fa-file-pdf"></i> Télécharger le rapport PDF
+    </button>
+  </div>
+
+  <script>
+    function downloadPDF() {
+      const element = document.getElementById('report-content');
+      if (!element) {
+        alert("Le rapport n'est pas encore généré.");
+        return;
+      }
+
+      // ✅ 1. Appliquer le thème PDF (texte noir, fond blanc)
+      element.classList.add('report-pdf');
+
+      // ✅ 2. Définir un nom de fichier dynamique
+      const patientName = "{{ patient.first_name }}_{{ patient.last_name }}".replace(/\s+/g, '_');
+      const date = "{{ report.analyzed_at.strftime('%Y-%m-%d_%H-%M') }}";
+      const filename = `rapport_EEG_${patientName}_${date}.pdf`;
+
+      // ✅ 3. Options pour html2pdf
+      const opt = {
+        margin: 0.5,
+        filename: filename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      const now = new Date();
+      document.getElementById('download-date').innerText =
+        now.toLocaleDateString('fr-FR') + ' à ' + now.toLocaleTimeString('fr-FR');
+
+      // ✅ 4. Générer le PDF, puis retirer la classe temporaire
+      html2pdf().set(opt).from(element).save().then(() => {
+        element.classList.remove('report-pdf');
+      });
+    }
+  </script>
 </body>
+
 </html>

@@ -89,7 +89,7 @@ def create_eegfile(patient_id):
             prediction = ml_model.predict(features)[0]
             prob = ml_model.predict_proba(features)[0].max()
 
-            diagnosis = "Schizophrenia" if prediction == 1 else "Healthy"
+            diagnosis = "Schizophrène" if prediction == 1 else "Sain"
 
             return {
                 "diagnosis": diagnosis,

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Profil</title>
+  <link rel="icon" href="{{ url_for('static', filename='pictures/NEUVERA2.png') }}" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard/profile.css') }}">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='pictures/NEUVERA1.png') }}" alt="Logo Neuvera">
+    </div>
+    <ul>
+      <li><a href="/api/dashboard" class="{% if request.path == '/api/dashboard/' %}active{% endif %}">Accueil</a></li>
+      <li><a href="/api/dashboard/profile" class="{% if request.path == '/api/dashboard/profile' %}active{% endif %}">Profil</a></li>
+      <li><a href="/api/dashboard/settings" class="{% if request.path == '/api/dashboard/settings' %}active{% endif %}">Paramètres</a></li>
+    </ul>
+  </nav>
+
+  <!-- Contenu principal -->
+  <main class="profile-page">
+    <!-- Titre en haut à gauche -->
+    <div class="top-left-info">
+      
+      <h1>👋 Bienvenue, <span class="username">{{ user.username }}</span> !</h1>
+    </div>
+
+<h2 class="to-left-info">📁 Vos informations personnelles :</h2>
+    <!-- Email + date centré au milieu -->
+    <section class="profile-info">
+      <div class="info-box large">
+        <i class="fas fa-envelope"></i>
+        <span>{{ user.email }}</span>
+      </div>
+      <div class="info-box large">
+        <i class="fas fa-calendar-alt"></i>
+        <span>{{ user.created_at.strftime('%d/%m/%Y') }}</span>
+      </div>
+    </section>
+
+    <!-- Badge ancienneté tout en bas -->
+    <div class="badge-container">
+      <span class="badge {% if account_age_days > 365 %}long{% elif account_age_days > 180 %}medium{% else %}new{% endif %}">
+         ⏲️ Tu as créé ton compte il y a {{ account_age_days }} jours —
+        {% if account_age_days > 365 %}
+          🌕 Membre Fidèle
+        {% elif account_age_days > 180 %}
+          🌓 Membre Régulier
+        {% else %}
+          🌒 Nouveau Membre
+        {% endif %}
+      </span>
+    </div>
+  </main>
+
+</body>
+</html>

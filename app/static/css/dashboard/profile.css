@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
+}
+
+body {
+  background-image: url('/static/pictures/back4.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #ffffff;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- NAVBAR --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 50px;
+  height: 65px;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1000;
+  font-size: 20px;
+}
+
+.logo img {
+  width: 200px;
+  max-height: 150px;
+  object-fit: contain;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+.navbar li {
+  margin-left: 30px;
+}
+
+.navbar a {
+  position: relative;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  margin: 0 10px;
+}
+
+.navbar a.active,
+.navbar a:hover {
+  color: #ff00e1;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.navbar a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ff00e1;
+  transition: width 0.3s ease;
+}
+
+.navbar a.active::after,
+.navbar a:hover::after {
+  width: 100%;
+}
+
+/* ----- PAGE CONTAINER ----- */
+.profile-page {
+  padding: 120px 2em 3em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ----- WELCOME SECTION ----- */
+.top-left-info {
+  align-self: flex-start;
+  margin-left: 40px;
+  margin-bottom: 10px;
+  animation: fadeSlide 1s ease forwards;
+  opacity: 0;
+}
+
+.top-left-info h1 {
+  font-size: 2.5em;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+
+
+.username {
+  color: #ff00a2;
+  text-shadow: white 0 0 5px;
+}
+
+/* ----- SUBTITLE ----- */
+.to-left-info {
+  align-self: flex-start;
+  margin-left: 40px;
+  margin-top: 5px;
+  font-size: 1.8em;
+  color: #ffffff;
+  animation: fadeSlide 1.2s ease forwards;
+  opacity: 0;
+}
+
+/* ----- INFO CARDS ----- */
+.profile-info {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 40px;
+  animation: fadeInUp 1.5s ease forwards;
+  opacity: 0;
+}
+
+.info-box {
+  background: rgba(142, 142, 142, 0.255);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.232);
+  padding: 20px 40px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+  cursor: default;
+}
+
+.info-box:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.info-box.large {
+  font-size: 1.3em;
+  min-width: 320px;
+  color: #fff;
+}
+
+.info-box i {
+  font-size: 1.3em;
+  color: #ff00a2;
+}
+
+/* ----- BADGE ----- */
+.badge-container {
+  margin-top: auto;
+  padding: 40px 0;
+  text-align: center;
+  animation: fadeInUp 1.8s ease forwards;
+  opacity: 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 40px;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: #ff00a2;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+}
+
+.badge.medium {
+  background-color: #ff0000;
+  color: #ffffff;
+}
+
+.badge.long {
+  background-color: #4c00ff;
+  color: #fff;
+}
+
+/* ----- ANIMATIONS ----- */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 768px) {
+  .profile-info {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .info-box.large {
+    min-width: 80%;
+    font-size: 1.1em;
+  }
+
+  .top-left-info, .to-left-info {
+    text-align: center;
+    align-self: center;
+    margin-left: 0;
+  }
+}

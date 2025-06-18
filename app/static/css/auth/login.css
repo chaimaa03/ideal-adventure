@@ -9,7 +9,7 @@
 
 /* ---- Structure générale ---- */
 body {
-  background: linear-gradient(135deg, #4c1a6a, #1a1a2e);
+  background: linear-gradient(100deg, #4c1a6a, #1a1a2e, rgb(255, 0, 234));
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -39,10 +39,22 @@ body {
   max-width: 400px;
   background: transparent;
   color: white;
+  margin-bottom: -70px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  /*box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);*/
 }
+
+.form-logo {
+  display: block;
+  margin: auto;
+  margin-bottom: 0px;;
+  margin-top: -200px;
+
+  width: 200px;
+  height: 168px;
+}
+
 
 h2 {
   text-align: center;
@@ -51,7 +63,9 @@ h2 {
 }
 
 .field {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  margin-left: -40px;
+  margin-right: -40px;
 }
 
 .field label {
@@ -66,21 +80,31 @@ h2 {
   padding: 12px;
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background-color: transparent;  /* <-- clé pour transparence réelle */
+  color: rgb(0, 0, 0);
   font-size: 0.95em;
-  transition: all 0.3s ease;
-  cursor: text;
+  transition: border 0.3s ease;
+  backdrop-filter: blur(2px);  /* optionnel pour un léger flou */
 }
 
 .field input::placeholder {
-  color: #bbb;
+  color: rgba(255, 255, 255, 0.6);  /* Plus doux */
 }
 
 .field input:focus {
-  border-color: #ff00d9;
-  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid #ff00d9;
+  background-color: rgba(255, 255, 255, 0.05); /* un tout petit peu visible */
   outline: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-internal-autofill-selected {
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.05) inset !important;
+  -webkit-text-fill-color: #fff !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /* ---- Bouton ---- */

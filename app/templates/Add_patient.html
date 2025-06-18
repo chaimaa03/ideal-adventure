@@ -1,23 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
-    <title>Add Patient</title>
+  <meta charset="UTF-8">
+  <title>Add patient</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/add_patient.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='pictures/NEUVERA2.png') }}" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-    <h1>Add Patient</h1>
-    <form method="POST" action="/api/dashboard/folder/patients/add_patient">
-        <label for="first_name">First Name:</label><br>
-        <input type="text" id="first_name" name="first_name"><br>
-        <label for="last_name">Last Name:</label><br>
-        <input type="text" id="last_name" name="last_name"><br>
-        <label for="birth_date">Birth Date:</label><br>
-        <input type="date" id="birth_date" name="birth_date"><br>
-        <label for="sex">Sex:</label><br>
-        <select id="sex" name="sex">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select><br><br>
-        <button type="submit">Add Patient</button>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='pictures/NEUVERA1.png') }}" alt="Logo Neuvera">
+    </div>
+    <ul>
+      <li><a href="/api/dashboard" class="{% if request.path == '/api/dashboard/' %}active{% endif %}">Accueil</a></li>
+      <li><a href="/api/dashboard/profile"
+          class="{% if request.path == '/api/dashboard/profile' %}active{% endif %}">Profil</a></li>
+      <li><a href="/api/dashboard/settings"
+          class="{% if request.path == '/api/dashboard/settings' %}active{% endif %}">Paramètres</a></li>
+    </ul>
+  </nav>
+
+
+  <main class="container">
+    <a href="{{ url_for('eeg_folder.list_patients') }}" class="back-link">
+      <i class="fas fa-arrow-left"></i> Retour à la liste
+    </a>
+    <h2>Ajouter un patient</h2>
+
+    <form method="POST" class="form-card" action="{{ url_for('eeg_folder.add_patient') }}">
+
+      <label for="first_name">Prénom :</label>
+      <input type="text" name="first_name" id="first_name" required>
+
+      <label for="last_name">Nom :</label>
+      <input type="text" name="last_name" id="last_name" required>
+
+      <label for="birthday">Date de naissance :</label>
+      <input type="date" name="birth_date" id="birth_date" required>
+
+      <label for="sex">Sexe :</label>
+      <select name="sex" id="sex" required>
+        <option value="">-- Sélectionner --</option>
+        <option value="M">Homme</option>
+        <option value="F">Femme</option>
+      </select>
+
+      <button type="submit" class="btn-primary">Ajouter</button>
     </form>
+  </main>
 </body>
+
 </html>
